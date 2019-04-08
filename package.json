@@ -1,0 +1,33 @@
+{
+  "name": "fixtures",
+  "version": "0.1.0",
+  "description": "simple web server to schedule court resrvations",
+  "main": "index.js",
+  "repository": "git@github.com:futsaltokyo/fixtures.git",
+  "author": "Kelvin Tay <kelvintaywl@gmail.com>",
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "start": "node src/index.js",
+    "validate-swagger": "swagger-cli validate openapi.yaml",
+    "test": "jest --config ./jest.json --runInBand --forceExit --detectOpenHandles",
+    "lint": "eslint ./src/ ./test"
+  },
+  "dependencies": {
+    "date-fns": "^1.30.1",
+    "dotenv": "^7.0.0",
+    "express": "^4.16.4",
+    "express-openapi": "^4.5.0",
+    "pg": "^7.9.0",
+    "sequelize": "^5.2.12"
+  },
+  "devDependencies": {
+    "eslint": "^5.16.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-jest": "^22.4.1",
+    "jest": "^24.7.1",
+    "sequelize-cli": "^5.4.0",
+    "superagent": "^5.0.2",
+    "swagger-cli": "^2.2.1"
+  }
+}
