@@ -1,6 +1,6 @@
 swagger: "2.0"
 info:
-  description: "Futsal Court Reservation as a Service"
+  description: "Futsal Court fixture as a Service"
   version: "0.1.0"
   title: "Fixtures"
   contact:
@@ -8,7 +8,7 @@ info:
 host: "api.futsaltokyo.xyz"
 basePath: "/"
 tags:
-- name: "reservation"
+- name: "fixture"
 
 schemes:
 - "https"
@@ -16,26 +16,33 @@ paths:
   /bonfim:
     post:
       tags:
-        - "reservation"
-      summary: "create new reservation run on Bonfim court"
-      description: "a list of found requests scheduled for reservation would be returned"
+        - "fixture"
+      summary: "create new fixture on Bonfim court"
+      description: "a list of found requests scheduled for fixture would be returned"
       operationId: "newBonfim"
       consumes:
       - "application/json"
       produces:
       - "application/json"
+      parameters:
+      - $ref: '#/parameters/authorization'
+      - in: "body"
+        name: "body"
+        description: "User details"
+        required: true
+        schema:
+          $ref: '#/definitions/NewBonfimFixturePayload' 
       responses:
         201:
-          description: "Successfully created fixtures, pending reservation"
+          description: "Successfully created fixtures, pending fixture"
         400:
           description: "Bad input"
         401:
           description: "Invalid secret token"
-
   /bonfim/{id}:
     get:
       tags:
-        - "reservation"
+        - "fixture"
       summary: "get specific fixture info on Bonfim court"
       description: "get specific fixture info on Bonfim court"
       operationId: "getBonfimById"
@@ -45,6 +52,7 @@ paths:
       - "application/json"
       parameters:
       - $ref: '#/parameters/id'
+      - $ref: '#/parameters/authorization'
       responses:
         200:
           description: "valid fixture info"
@@ -54,7 +62,7 @@ paths:
           description: "fixture not found"
     delete:
       tags:
-        - "reservation"
+        - "fixture"
       summary: "delete specific fixture info on Bonfim court"
       description: "delete specific fixture info on Bonfim court"
       operationId: "deleteBonfimById"
@@ -64,6 +72,7 @@ paths:
       - "application/json"
       parameters:
       - $ref: '#/parameters/id'
+      - $ref: '#/parameters/authorization'
       responses:
         204:
           description: "no content"
@@ -71,6 +80,27 @@ paths:
           description: "Invalid secret token"
         404:
           description: "fixture not found"
+definitions:
+  NewBonfimFixturePayload:
+    type: "object"
+    required:
+      - court
+      - date
+      - time
+    properties:
+      court:
+        type: "string"
+        enum: [
+          "indoor",
+          "outdoor"
+        ]
+      date:
+        type: "string"
+        format: "date-time"
+      time:
+        type: "string"
+        # e.g., 1700-2359
+        pattern: "^([01][0-9]|2[0-3]):?([0-5][0-9])-([01][0-9]|2[0-3]):?([0-5][0-9])$"
 parameters:
   id:
     in: "path"
@@ -79,3 +109,9 @@ parameters:
     required: true
     type: "string"
     format: "uuid"
+  authorization:
+    name: "authorization"
+    in: "header"
+    description: "authorization key in header (secret token)"
+    type: "string"
+    pattern: "^TOKEN (.+)$"

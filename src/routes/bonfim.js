@@ -1,5 +1,5 @@
 const auth = require('../middlewares/auth');
-const postResponse = require('../middlewares/postResponse');
+// const postResponse = require('../middlewares/postResponse');
 const { createFixture } = require('../services/fixtures');
 
 async function newFixture(req, res, next) {
@@ -9,11 +9,12 @@ async function newFixture(req, res, next) {
     time,
   } = req.body;
   const { id } = await createFixture({ courtType, date, time });
+
   res.status(201).json({ id });
   return next();
 }
 
 
 module.exports = {
-  post: [auth, newFixture, postResponse],
+  post: [auth, newFixture],
 };

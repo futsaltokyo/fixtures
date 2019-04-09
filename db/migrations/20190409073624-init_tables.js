@@ -8,9 +8,9 @@ CREATE TABLE fixtures (
   event_date TIMESTAMPTZ NOT NULL,
   booking_date TIMESTAMPTZ NOT NULL,
   duration INTERVAL NOT NULL,
-  requested_at TIMESTAMPTZ NOT NULL,
-  modified_at TIMESTAMPTZ NOT NULL,
-  metadata JSON
+  metadata JSON,
+  requested_at TIMESTAMPTZ NOT NULL DEFAULT (NOW() at time zone 'Asia/Tokyo'),
+  modified_at TIMESTAMPTZ NOT NULL DEFAULT (NOW() at time zone 'Asia/Tokyo')
 );
 
 CREATE TABLE bonfim (

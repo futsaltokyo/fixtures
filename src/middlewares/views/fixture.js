@@ -1,13 +1,16 @@
-function makeView(req, res, next) {
+function makeView(req, res) {
   const { fixture } = req;
   return res.json({
     id: fixture.id,
+    court: fixture.court,
     event: {
       day: fixture.eventDate,
       start: fixture.eventStartHour,
       end: fixture.eventEndHour,
     },
-    status: fixture.status,
+    booking: {
+      scheduledAt: fixture.bookingDate,
+    },
   });
 }
 
