@@ -1,5 +1,5 @@
-const dotenv = require('dotenv');
 const path = require('path');
+const dotenv = require('dotenv');
 
 dotenv.config();
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
@@ -9,6 +9,9 @@ const config = {
   openAPI: {
     doc: process.env.OPENAPI_DOC_FILEPATH,
     routes: path.resolve(__dirname, 'routes'),
+  },
+  auth: {
+    secret: process.env.SECRET_KEY,
   },
   // using PostgreSQL
   database: {

@@ -2,8 +2,8 @@ const config = require('./config');
 const app = require('./app');
 
 function runner() {
-  const server = app.listen(config.port, () => {
-    logger.info(`Fixtures running on http://localhost:${config.port}`);
+  app.listen(config.port, () => {
+    // TODO: logging
   });
 
   process.on('SIGTERM', () => {

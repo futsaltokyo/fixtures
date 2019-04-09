@@ -1,0 +1,17 @@
+{
+  "name": "db",
+  "version": "0.1.0",
+  "description": "migration management for fixtures",
+  "scripts": {
+    "migration:create": "sequelize migration:generate",
+    "migration:up": "sequelize db:migrate",
+    "migration:down": "sequelize db:migrate:undo:all"
+  },
+  "dependencies": {
+    "dotenv": "^7.0.0",
+    "pg": "^7.9.0",
+    "sequelize": "^5.2.13",
+    "sequelize-cli": "^5.4.0",
+    "uuid": "^3.3.2"
+  }
+}

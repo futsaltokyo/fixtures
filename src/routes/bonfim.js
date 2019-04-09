@@ -1,6 +1,19 @@
+const auth = require('../middlewares/auth');
+const postResponse = require('../middlewares/postResponse');
+const { createFixture } = require('../services/fixtures');
+
+async function newFixture(req, res, next) {
+  const {
+    court: courtType,
+    date,
+    time,
+  } = req.body;
+  const { id } = await createFixture({ courtType, date, time });
+  res.status(201).json({ id });
+  return next();
+}
+
+
 module.exports = {
-  // GET /v1/user/:userId
-  get: [existsFixture, getFixture],
-  // DELETE /v1/user/:userId
-  delete: [existsFixture, getFixture],
+  post: [auth, newFixture, postResponse],
 };

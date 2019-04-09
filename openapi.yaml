@@ -1,0 +1,81 @@
+swagger: "2.0"
+info:
+  description: "Futsal Court Reservation as a Service"
+  version: "0.1.0"
+  title: "Fixtures"
+  contact:
+    email: "kelvintaywl@gmail.com"
+host: "api.futsaltokyo.xyz"
+basePath: "/"
+tags:
+- name: "reservation"
+
+schemes:
+- "https"
+paths:
+  /bonfim:
+    post:
+      tags:
+        - "reservation"
+      summary: "create new reservation run on Bonfim court"
+      description: "a list of found requests scheduled for reservation would be returned"
+      operationId: "newBonfim"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      responses:
+        201:
+          description: "Successfully created fixtures, pending reservation"
+        400:
+          description: "Bad input"
+        401:
+          description: "Invalid secret token"
+
+  /bonfim/{id}:
+    get:
+      tags:
+        - "reservation"
+      summary: "get specific fixture info on Bonfim court"
+      description: "get specific fixture info on Bonfim court"
+      operationId: "getBonfimById"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - $ref: '#/parameters/id'
+      responses:
+        200:
+          description: "valid fixture info"
+        401:
+          description: "Invalid secret token"
+        404:
+          description: "fixture not found"
+    delete:
+      tags:
+        - "reservation"
+      summary: "delete specific fixture info on Bonfim court"
+      description: "delete specific fixture info on Bonfim court"
+      operationId: "deleteBonfimById"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - $ref: '#/parameters/id'
+      responses:
+        204:
+          description: "no content"
+        401:
+          description: "Invalid secret token"
+        404:
+          description: "fixture not found"
+parameters:
+  id:
+    in: "path"
+    name: "id"
+    description: "ID of fixture"
+    required: true
+    type: "string"
+    format: "uuid"
