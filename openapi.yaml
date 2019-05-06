@@ -31,7 +31,7 @@ paths:
         description: "User details"
         required: true
         schema:
-          $ref: '#/definitions/NewBonfimFixturePayload' 
+          $ref: '#/definitions/NewBonfimFixturePayload'
       responses:
         201:
           description: "Successfully created fixtures, pending fixture"
@@ -114,4 +114,4 @@ parameters:
     in: "header"
     description: "authorization key in header (secret token)"
     type: "string"
-    pattern: "^TOKEN (.+)$"
+    pattern: "TOKEN (.+)"

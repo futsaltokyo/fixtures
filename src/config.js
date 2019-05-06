@@ -37,6 +37,7 @@ const config = {
       acquire: 30000,
       evict: 10000,
     },
+    timezone: 'Asia/Tokyo',
   },
 };
 

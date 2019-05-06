@@ -9,6 +9,7 @@
   },
   "extends": "airbnb-base",
   "plugins": [
+    "import",
     "jest"
   ]
 }

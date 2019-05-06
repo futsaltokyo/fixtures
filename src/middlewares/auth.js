@@ -2,12 +2,12 @@ const config = require('../config');
 
 function extract(header) {
   if (!header) {
-    throw new InvalidCredentials();
+    return undefined;
   }
   const pattern = /^TOKEN\s+(.+)$/i;
   const matches = header.match(pattern);
   if (!matches) {
-    throw new InvalidCredentials();
+    return undefined;
   }
   const token = matches[1];
   return token;
